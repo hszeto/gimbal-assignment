@@ -2,7 +2,6 @@ class LocationsController < ApplicationController
   before_action :validate_latlon
 
   def nearby
-    ap current_position_params
     render json: {}, status: 200
   end
 
@@ -22,9 +21,8 @@ class LocationsController < ApplicationController
   end
 
   def current_position_params
-    params
-      .permit(:lat, :lon)
-      .to_h
-      .symbolize_keys
+    params.permit(:lat, :lon)
+          .to_h
+          .symbolize_keys
   end
 end
