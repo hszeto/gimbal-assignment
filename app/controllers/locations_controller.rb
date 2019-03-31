@@ -14,8 +14,8 @@ class LocationsController < ApplicationController
   private
 
   def validate_coordinate
-    render json: { error: 'missing params' }, status: 422 if !coordinate_present?
-    render json: { error: 'invalid params' }, status: 422 if !all_floats?
+    render json: { error: 'missing params' }, status: 422 and return if !coordinate_present?
+    render json: { error: 'invalid params' }, status: 422 and return if !all_floats?
   end
 
   def coordinate_present?
@@ -27,7 +27,8 @@ class LocationsController < ApplicationController
   end
 
   def current_position_params
-    params.permit(:lat, :lon)
+    params.require(:location)
+          .permit(:lat, :lon)
           .to_h
           .symbolize_keys
   end

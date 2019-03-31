@@ -5,7 +5,10 @@ RSpec.describe 'Nearby Cafes', type: :request do
 
     context 'when request is valid' do
       it 'returns 5 cafes around Gimbal' do
-        post('/api/nearby', params: gimbal_latlon)
+        post('/api/nearby',
+          params: { location: gimbal_latlon }.to_json,
+          headers: { 'Content-Type' => 'application/json' }
+        )
 
         parsed_body = JSON.parse(response.body)
         response_cafe_names = parsed_body['cafes'].map{ |m| m['name'] }
@@ -18,7 +21,10 @@ RSpec.describe 'Nearby Cafes', type: :request do
       end
 
       it 'returns 5 cafes around i.am+' do
-        post('/api/nearby', params: iamplus_latlon)
+        post('/api/nearby',
+          params: {location: iamplus_latlon }.to_json,
+          headers: { 'Content-Type' => 'application/json' }
+        )
 
         parsed_body = JSON.parse(response.body)
         response_cafe_names = parsed_body['cafes'].map{ |m| m['name'] }
@@ -33,21 +39,21 @@ RSpec.describe 'Nearby Cafes', type: :request do
 
     context 'when request is invalid' do
       it 'blank params return 422' do
-        post('/api/nearby', params: {})
+        post('/api/nearby', params: {location:{lon:''}}.to_json, headers: { 'Content-Type' => 'application/json' })
 
         expect(response.status).to eq(422)
         expect(JSON.parse(response.body)['error']).to eq 'missing params'
       end
 
       it 'missing params return 422' do
-        post('/api/nearby', params: {lat: '34.034560'})
+        post('/api/nearby', params: {location:{lat: '34.034560'}}.to_json, headers: { 'Content-Type' => 'application/json' })
 
         expect(response.status).to eq(422)
         expect(JSON.parse(response.body)['error']).to eq 'missing params'
       end
 
       it 'params not a float number return 422' do
-        post('/api/nearby', params: {lat: '-11', lon: 'abc123'})
+        post('/api/nearby', params: {location:{lat: '-11', lon: 'abc123'}}.to_json, headers: { 'Content-Type' => 'application/json' })
 
         expect(response.status).to eq(422)
         expect(JSON.parse(response.body)['error']).to eq 'invalid params'

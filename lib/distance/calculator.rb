@@ -1,6 +1,7 @@
 module Distance
   class Calculator
     attr_reader :current_coordinate
+    require 'csv'
 
     def initialize(current_coordinate)
       @current_coordinate = current_coordinate
