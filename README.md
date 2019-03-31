@@ -12,7 +12,7 @@
 ### Usage with curl
 ```
 curl -X POST \
-  http://localhost:3000/api/nearby \
+  https://gimbal-assignment.herokuapp.com/api/nearby \
   -H 'Content-Type: application/json' \
   -d '{
     "lat": "34.0342747",
