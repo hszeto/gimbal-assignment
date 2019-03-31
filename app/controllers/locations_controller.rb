@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
 
   def nearby
     results = Distance::Calculator.new(
-      [ current_position_params[:lat].to_f, current_position_params[:lon].to_f ]
+      [current_position_params[:lat].to_f, current_position_params[:lon].to_f]
     ).closest_five
 
     radius = results.last[:distance]
@@ -19,7 +19,7 @@ class LocationsController < ApplicationController
   end
 
   def coordinate_present?
-    %i(lat lon).all? { |l| current_position_params.key? l }
+    %i[lat lon].all? { |l| current_position_params.key? l }
   end
 
   def all_floats?

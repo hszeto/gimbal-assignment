@@ -1,5 +1,5 @@
 class Cafe < ApplicationRecord
   def coordinate
-    [self.lat, self.lon]
+    [lat, lon]
   end
 end
