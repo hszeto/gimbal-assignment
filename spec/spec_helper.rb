@@ -93,6 +93,17 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  # Clear test db
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  # Seed test db
+  config.before(:suite) do
+    Rails.application.load_seed # loading seeds
+  end
 end
 
 require 'rails_helper'

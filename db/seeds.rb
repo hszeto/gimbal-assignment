@@ -6,6 +6,4 @@ CSV.foreach(Rails.root.join('db/cafes.csv'), headers: true) do |row|
     :lat => row[1],
     :lon => row[2]
   })
-
-  puts 'Row added.'
 end
