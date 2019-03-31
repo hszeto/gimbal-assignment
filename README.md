@@ -1,24 +1,34 @@
 # README
+* Rails version 5.2.2
+* Ruby version 2.5.1
+* Run test:
+  1. bundle install
+  2. rake db:create
+  3. rake db:migrate
+  3. rake db:seed
+  2. rake db:migrate RAILS_ENV=test 
+  3. bundle exec rspec spec
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Usage with curl
+```
+curl -X POST \
+  http://localhost:3000/api/nearby \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "lat": "34.0342747",
+    "lon": "-118.241705"
+  }'
+```
+##### Success response body:
+```
+{"cafes": [{...}], "radius": 1.2345}
+```
+##### Success response code: 
+* 200
+##### Fail response body:
+```
+{"error": "Invalid params"}
+```
+##### Fail response error code: 
+* 422
+* reason: missing params or invalid params
