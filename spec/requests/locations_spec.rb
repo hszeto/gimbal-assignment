@@ -39,6 +39,13 @@ RSpec.describe 'Nearby Cafes', type: :request do
 
     context 'when request is invalid' do
       it 'blank params return 422' do
+        post('/api/nearby', params: {}.to_json, headers: { 'Content-Type' => 'application/json' })
+
+        expect(response.status).to eq(422)
+        expect(JSON.parse(response.body)['error']).to include 'param is missing'
+      end
+
+      it 'blank params return 422' do
         post('/api/nearby', params: {location:{lon:''}}.to_json, headers: { 'Content-Type' => 'application/json' })
 
         expect(response.status).to eq(422)

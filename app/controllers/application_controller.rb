@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include ErrorHandler
 
   def liveness
     logger.info 'Alive.....'

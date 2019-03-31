@@ -14,8 +14,8 @@ class LocationsController < ApplicationController
   private
 
   def validate_coordinate
-    render json: { error: 'missing params' }, status: 422 and return if !coordinate_present?
-    render json: { error: 'invalid params' }, status: 422 and return if !all_floats?
+    raise ErrorHandler::UnprocessableEntity, 'missing params' if !coordinate_present?
+    raise ErrorHandler::UnprocessableEntity, 'invalid params' if !all_floats?
   end
 
   def coordinate_present?
