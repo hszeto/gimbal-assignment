@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   get '/readiness', to: 'application#readiness'
 
   scope 'api' do
-    post 'nearby', to: 'location#nearby'
+    post 'nearby', to: 'locations#nearby'
   end
 end
