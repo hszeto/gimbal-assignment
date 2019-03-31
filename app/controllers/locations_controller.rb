@@ -1,18 +1,24 @@
 class LocationsController < ApplicationController
-  before_action :validate_latlon
+  before_action :validate_coordinate
 
   def nearby
-    render json: {}, status: 200
+    results = Distance::Calculator.new(
+      [ current_position_params[:lat].to_f, current_position_params[:lon].to_f ]
+    ).closest_five
+
+    radius = results.last[:distance]
+
+    render json: { cafes: results, radius: radius }, status: 200
   end
 
   private
 
-  def validate_latlon
-    render json:{error: 'missing params'}, status: 422 if !latlon_present?
-    render json:{error: 'invalid params'}, status: 422 if !all_floats?
+  def validate_coordinate
+    render json: { error: 'missing params' }, status: 422 if !coordinate_present?
+    render json: { error: 'invalid params' }, status: 422 if !all_floats?
   end
 
-  def latlon_present?
+  def coordinate_present?
     %i(lat lon).all? { |l| current_position_params.key? l }
   end
 

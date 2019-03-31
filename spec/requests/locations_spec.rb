@@ -1,12 +1,33 @@
 RSpec.describe 'Nearby Cafes', type: :request do
   describe 'POST /nearby' do
-    let(:gimbal_latlon){{ lat: '34.034560', lon: '-118.227870' }}
+    let(:gimbal_latlon){{ lat: '34.0342747', lon: '-118.241705' }}
+    let(:iamplus_latlon){{ lat: '34.087100', lon:'-118.328810' }}
 
     context 'when request is valid' do
-      it 'returns 5 cafes' do
+      it 'returns 5 cafes around Gimbal' do
         post('/api/nearby', params: gimbal_latlon)
 
+        parsed_body = JSON.parse(response.body)
+        response_cafe_names = parsed_body['cafes'].map{ |m| m['name'] }
+        response_radius = parsed_body['radius']
+
         expect(response.status).to eq(200)
+        expect(response_radius).to eq(0.9501942255108312)
+        expect(response_cafe_names)
+          .to contain_exactly 'Blue Bottle Coffee','Urth Caffé','Stumptown Coffee Roasters','Verve Coffee - DTLA','L.A. Cafe'
+      end
+
+      it 'returns 5 cafes around i.am+' do
+        post('/api/nearby', params: iamplus_latlon)
+
+        parsed_body = JSON.parse(response.body)
+        response_cafe_names = parsed_body['cafes'].map{ |m| m['name'] }
+        response_radius = parsed_body['radius']
+
+        expect(response.status).to eq(200)
+        expect(response_radius).to eq(0.9538984757926076)
+        expect(response_cafe_names)
+          .to contain_exactly 'Cafe Gratitude','Groundwork Coffee Co.','Go Get Em Tiger','Coffee Commissary','M Cafe'
       end
     end
 
