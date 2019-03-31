@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'Application', type: :request do
   describe 'Liveness and Readiness' do
     it 'System is alive' do
