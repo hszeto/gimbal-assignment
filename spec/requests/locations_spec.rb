@@ -43,6 +43,7 @@ RSpec.describe 'Nearby Cafes', type: :request do
 
         expect(response.status).to eq(422)
         expect(JSON.parse(response.body)['error']).to include 'param is missing'
+        expect(response.headers['Warning']).to include 'param is missing'
       end
 
       it 'blank params return 422' do
@@ -50,6 +51,7 @@ RSpec.describe 'Nearby Cafes', type: :request do
 
         expect(response.status).to eq(422)
         expect(JSON.parse(response.body)['error']).to eq 'missing params'
+        expect(response.headers['Warning']).to eq 'missing params'
       end
 
       it 'missing params return 422' do
@@ -57,6 +59,7 @@ RSpec.describe 'Nearby Cafes', type: :request do
 
         expect(response.status).to eq(422)
         expect(JSON.parse(response.body)['error']).to eq 'missing params'
+        expect(response.headers['Warning']).to eq 'missing params'
       end
 
       it 'params not a float number return 422' do
@@ -64,6 +67,7 @@ RSpec.describe 'Nearby Cafes', type: :request do
 
         expect(response.status).to eq(422)
         expect(JSON.parse(response.body)['error']).to eq 'invalid params'
+        expect(response.headers['Warning']).to eq 'invalid params'
       end
     end
   end
