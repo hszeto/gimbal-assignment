@@ -19,23 +19,10 @@ module Distance
 
       results = cafes.sort_by{ |c| c[:distance] }[0..4]
 
-      save_csv_for results
-
       results
     end
 
     private
-
-    def save_csv_for results
-      CSV.open("tmp/results.csv", "wb",
-        :write_headers => true,
-        :headers => ['lat', 'lng', 'name']
-      ) do |csv|
-        results.each do |c|
-          csv << c.values_at(:lat, :lon, :name)
-        end
-      end
-    end
 
     # Haversine formula from https://stackoverflow.com/a/12969617
     def distance_from cafe_coordinate
