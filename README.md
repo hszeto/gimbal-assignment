@@ -1,7 +1,6 @@
-## Gimbal assignment for Henry Szeto
 ## An api that returns 5 closest cafes based on a given lat/lon coordinate.
 ### Download my Android app on your phone to see this api in action.
-[![alt text](https://play.google.com/intl/en_us/badges/images/badge_new.png)]("https://play.google.com/store/apps/details?id=com.gimbal_assignment.app")
+https://play.google.com/store/apps/details?id=com.gimbal_assignment.app
 
 ---
 * Rails version 5.2.2
