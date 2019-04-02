@@ -1,4 +1,4 @@
-# README
+## A GET api that returns 5 closest cafes based on a given lat/lon coordinate.
 * Rails version 5.2.2
 * Ruby version 2.5.1
 * Run test locally:
@@ -11,20 +11,13 @@
 ---
 ### Usage with curl
 ```
-curl -X POST \
-  https://gimbal-assignment.herokuapp.com/api/nearby \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "lat": "34.0342747",
-    "lon": "-118.241705"
-  }'
+curl -X GET 'https://gimbal-assignment.herokuapp.com/api/nearby?lat=34.087100&lon=-118.241705'
 ```
 ---
 |Request| | |
 |-|-|-|
-|Resourse|POST https://gimbal-assignment.herokuapp.com/api/nearby| |
-|Headers|{'Content-Type' => 'application/json'}||
-|Body|{"lat": "34.0342747", "lon": "-118.241705"}| Required: lat, lon|
+|Resourse|GET https://gimbal-assignment.herokuapp.com/api/nearby| |
+|url params|?lat=34.0342747&lon=-118.241705| Required: lat, lon|
 
 |Response| | |
 |-|-|-|

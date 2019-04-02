@@ -27,8 +27,7 @@ class LocationsController < ApplicationController
   end
 
   def current_position_params
-    params.require(:location)
-          .permit(:lat, :lon)
+    params.permit(:lat, :lon)
           .to_h
           .symbolize_keys
   end
